@@ -93,7 +93,7 @@ jobs:
           git config --global user.name "${{ secrets.USER_GITHUB }}"
           git add .
           git commit -m "Automated commit - ${{ github.sha }}"
-          git push --set-upstream origin ${{ github.head_ref }}
+          git push --set-upstream origin master
         env:
           GH_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
  
