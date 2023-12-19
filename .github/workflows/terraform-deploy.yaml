@@ -83,7 +83,7 @@ jobs:
           echo "endpoint=$ENDPOINT" >> $GITHUB_ENV
       - name: Write Catalogo Info RDS
         run: |   
-          yq e ' .metadata.endpoint =  ${{ env.endpoint }}' -i catalog-info.yaml
+          yq e ' .metadata.environment.endpoint =  ${{ env.endpoint }}' -i catalog-info.yaml
           cat ./catalog-info.yaml
       - name: Set up Git
         run: |
@@ -94,7 +94,6 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          echo "Automated commit" >> changes.txt
           git add .
           git commit -m "Automated commit - ${{ github.sha }}"
           git push --set-upstream origin ${{ github.head_ref }}
