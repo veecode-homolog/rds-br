@@ -87,6 +87,8 @@ jobs:
           cat ./catalog-info.yaml
       - name: Commit and Push Changes
         run: |
+          git remote rm origin
+          git remote add origin "https://github.com/${{ github.repository }}.git"
           git config --global user.email "${{ secrets.EMAIL_GITHUB }}"
           git config --global user.name "${{ secrets.USER_GITHUB }}"
           git add .
