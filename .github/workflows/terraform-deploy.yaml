@@ -67,18 +67,12 @@ jobs:
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-          DESTINATION_BRANCH: master
+          DESTINATION_BRANCH: $(echo $GITHUB_REF | awk -F'/' '{print $NF}')
         with:
           destination_branch: ${{ env.DESTINATION_BRANCH }}
           source_file: './catalog-info.yaml'
           destination_repo: ${{ github.repository }}
           destination_folder: '/'
-          #user_name: ValberJunior
           commit_message: Update catalog-info.yaml in the same repo
           git_server: github.com
-
-      - name: Echo Branch name
-        run: |
-          export BRANCH_NAME=$(echo $GITHUB_REF | awk -F'/' '{print $NF}')
-          echo "Branch Name: $BRANCH_NAME"
            
