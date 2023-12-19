@@ -85,19 +85,12 @@ jobs:
         run: |   
           yq e ' .metadata.environment.endpoint =  ${{ env.endpoint }}' -i catalog-info.yaml
           cat ./catalog-info.yaml
-      - name: Git config
+      - name: Commit and Push Changes
         run: |
-          git config ${{ github.actor }} github-actions
-          git config ${{ github.event.pusher.email }} github-actions@github.com          
-      - name: Publish Catalogo Info
-        uses: dmnemec/copy_file_to_another_repo_action@main
+          echo "Automated commit" >> changes.txt
+          git add .
+          git commit -m "Automated commit - ${{ github.sha }}"
+          git push --set-upstream origin ${{ github.head_ref }}
         env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          destination_branch: master
-          source_file:  './'
-          destination_repo: ${{ github.repository }}
-          destination_folder: '/'
-          user_name: ${{ github.actor }}
-          commit_message: 'Pipeline commit'  
+          GH_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
  
