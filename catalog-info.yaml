@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Database
+metadata:
+  name: "rds-instance-br"
+  annotations:
+    github.com/project-slug: veecode-homolog/rds-br
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: devops
+  lifecycle: experimental
+  owner: "group:default/admin"
