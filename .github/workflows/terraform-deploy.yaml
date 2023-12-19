@@ -67,7 +67,7 @@ jobs:
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-          DESTINATION_BRANCH: ${{ github.ref##*/}}
+          DESTINATION_BRANCH: master
         with:
           destination_branch: ${{ env.DESTINATION_BRANCH }}
           source_file: './catalog-info.yaml'
