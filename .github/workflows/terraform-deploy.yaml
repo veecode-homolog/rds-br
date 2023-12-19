@@ -60,6 +60,7 @@ jobs:
 
       - name: Write Catalogo Info
         run: |
+          export BRANCH_NAME=$(echo $GITHUB_REF | awk -F'/' '{print $NF}')
           yq e '.metadata.environment.endpoint = ${{ env.endpoint }}' -i catalog-info.yaml
           cat ./catalog-info.yaml
 
@@ -67,7 +68,7 @@ jobs:
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-          DESTINATION_BRANCH: $(echo $GITHUB_REF | awk -F'/' '{print $NF}')
+          DESTINATION_BRANCH: ${{ env.BRANCH_NAME }}
         with:
           destination_branch: ${{ env.DESTINATION_BRANCH }}
           source_file: './catalog-info.yaml'
