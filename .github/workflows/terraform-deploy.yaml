@@ -86,17 +86,16 @@ jobs:
           yq e ' .metadata.environment.endpoint =  ${{ env.endpoint }}' -i catalog-info.yaml
           cat ./catalog-info.yaml
           
-      - name: Publish Catalogo Info
-        uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          destination_branch: ${{ github.ref }}
-          source_file: './catalog-info.yaml'
-          destination_repo: ${{ github.repository }}
-          destination_folder: '/'
-          user_name: ${{ github.actor }}
-          commit_message: 'Update catalog-info.yaml in the same repo'
-
-
+      - name: Set up Git
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+  
+      - name: Your Build and other steps here
+  
+      - name: Commit and Push Changes
+        run: |
+          git add .
+          git commit -m "Build changes"
+          git push origin master
 
