@@ -79,4 +79,4 @@ jobs:
 
       - name: Echo Branch name
         run: |
-           echo 'Branch >>>>> ${{ github.ref##*/}}'
+           echo 'Branch >>>>> ${{ github.ref }}'
