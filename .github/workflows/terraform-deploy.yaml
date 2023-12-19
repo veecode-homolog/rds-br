@@ -73,6 +73,6 @@ jobs:
           source_file: './catalog-info.yaml'
           destination_repo: ${{ github.repository }}
           destination_folder: '/'
-          user_name: ValberJunior
+          #user_name: ValberJunior
           commit_message: Update catalog-info.yaml in the same repo
           git_server: github.com
