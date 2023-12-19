@@ -60,7 +60,7 @@ jobs:
 
       - name: Write Catalogo Info
         run: |
-          echo '${{ github.ref }} ${{ github.repository }}'
+          echo '${GITHUB_REF#refs/heads/}'
           yq e '.metadata.environment.endpoint = ${{ env.endpoint }}' -i catalog-info.yaml
           cat ./catalog-info.yaml
 
