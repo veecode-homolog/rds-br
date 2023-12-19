@@ -60,6 +60,7 @@ jobs:
 
       - name: Write Catalogo Info
         run: |
+          echo '${{ github.ref }} ${{ github.repository }}'
           yq e '.metadata.environment.endpoint = ${{ env.endpoint }}' -i catalog-info.yaml
           cat ./catalog-info.yaml
 
@@ -68,7 +69,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          destination_branch: ${{ github.ref }}
+          destination_branch: master
           source_file: './catalog-info.yaml'
           destination_repo: ${{ github.repository }}
           destination_folder: '/'
