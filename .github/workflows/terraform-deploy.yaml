@@ -68,7 +68,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          destination_branch: master  # Ajuste para "master" em vez de "refs/heads/master"
+          destination_branch: master
           source_file: './catalog-info.yaml'
           destination_repo: veecode-homolog/rds-br
           destination_folder: '/'
