@@ -80,3 +80,4 @@ jobs:
       - name: Echo Branch name
         run: |
            echo 'Branch >>>>> ${{ github.ref }}'
+           echo "Branch name: ${GITHUB_REF##*/}" >> $GITHUB_ENV
