@@ -57,21 +57,21 @@ jobs:
           ENDPOINT=`aws rds describe-db-instances --db-instance-identifier teste --query 'DBInstances[0].Endpoint.Address'`
           echo $ENDPOINT
           echo "endpoint=$ENDPOINT" >> $GITHUB_ENV
-      - name: Write Catalogo Info RDS
-        run: |   
-          yq e ' .metadata.environment.endpoint =  ${{ env.endpoint }}' -i catalog-info.yaml
+
+      - name: Write Catalogo Info
+        run: |
+          yq e '.metadata.environment.endpoint = ${{ env.endpoint }}' -i catalog-info.yaml
           cat ./catalog-info.yaml
-          
-      - name: Set up Git
-        run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-          git config credential.helper 'cache --timeout=1200'
-          echo "machine github.com login ${{ secrets.GITHUB_ACTOR }} password ${{ secrets.GITHUB_TOKEN }}" > ~/.netrc
 
-      - name: Commit and Push Changes
-        run: |
-          git add .
-          git commit -m "Build changes"
-          git push origin master
-
+      - name: Publish Catalogo Info
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          destination_branch: master  # Ajuste para "master" em vez de "refs/heads/master"
+          source_file: './catalog-info.yaml'
+          destination_repo: veecode-homolog/rds-br
+          destination_folder: '/'
+          user_name: ValberJunior
+          commit_message: Update catalog-info.yaml in the same repo
+          git_server: github.com
