@@ -76,3 +76,7 @@ jobs:
           #user_name: ValberJunior
           commit_message: Update catalog-info.yaml in the same repo
           git_server: github.com
+
+      - name: Echo Branch name
+        run: |
+           echo 'Branch >>>>> ${{ github.ref##*/}}'
