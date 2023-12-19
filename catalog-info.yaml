@@ -5,6 +5,8 @@ metadata:
   annotations:
     github.com/project-slug: veecode-homolog/rds-br
     backstage.io/techdocs-ref: dir:.
+  environment:
+    endpoint: teste.ciz9arz22p50.us-east-1.rds.amazonaws.com
 spec:
   type: devops
   lifecycle: experimental
